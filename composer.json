@@ -1,5 +1,5 @@
 {
-  "name": "vendor_name/simple-di",
+  "name": "ericsnguyen/simple-di",
   "description": "a simple dependency injection library",
   "minimum-stability": "stable",
   "license": "proprietary",
