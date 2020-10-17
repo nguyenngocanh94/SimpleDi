@@ -1,0 +1,19 @@
+{
+  "name": "vendor_name/simpledi",
+  "description": "a simple dependency injection library",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Eric s Nguyen",
+      "email": "20120035@student.hut.edu.vn"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "doctrine/annotations": "^1.10"
+  },
+  "autoload": {
+    "psr-4": { "SimpleDi\\": "lib/SimpleDi/" }
+  }
+}
