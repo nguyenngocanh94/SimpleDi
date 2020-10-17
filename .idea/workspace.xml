@@ -35,7 +35,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../mrp" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -43,6 +43,21 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\Desktop\Library\SimpleDi\lib\SimpleDi\Registry" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="generate.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/bin/generate.php">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.generate.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -54,7 +69,7 @@
       <updated>1602916872036</updated>
       <workItem from="1602916873174" duration="619000" />
       <workItem from="1602917505172" duration="2303000" />
-      <workItem from="1602921433686" duration="1985000" />
+      <workItem from="1602921433686" duration="4975000" />
     </task>
     <servers />
   </component>
@@ -70,21 +85,40 @@
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-1112" y="311" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602920989839" />
-    <state x="-1230" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602917286463">
+    <state x="-1230" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602925215889">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="-1230" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602917286463" />
+    <state x="-1230" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602925215889" />
     <state x="-1182" y="437" key="ComposerInitDialogKey" timestamp="1602916961140">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-1182" y="437" key="ComposerInitDialogKey/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602916961140" />
-    <state x="-1240" y="247" key="NewPhpClassDialog" timestamp="1602921728901">
+    <state x="-1180" y="279" key="FileChooserDialogImpl" timestamp="1602924485731">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="-1240" y="247" key="NewPhpClassDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602921728901" />
+    <state x="-1180" y="279" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602924485731" />
+    <state x="-1240" y="247" key="NewPhpClassDialog" timestamp="1602925337450">
+      <screen x="-1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="-1240" y="247" key="NewPhpClassDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602925337450" />
+    <state x="-1125" y="448" key="NewPhpFileDialog" timestamp="1602925352182">
+      <screen x="-1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="-1125" y="448" key="NewPhpFileDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602925352182" />
     <state x="-1297" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1602922746981">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-1297" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1602922746981" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/bin/generate.php</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

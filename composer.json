@@ -2,7 +2,9 @@
   "name": "ericsnguyen/simple-di",
   "description": "a simple dependency injection library",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "type": "library",
+  "keywords": ["dependency injection", "DI", "simple di"],
+  "license": "MIT",
   "authors": [
     {
       "name": "Eric s Nguyen",
