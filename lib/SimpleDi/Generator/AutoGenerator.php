@@ -15,7 +15,7 @@ use SimpleDi\Annotations\AnnotationReader;
  */
 class AutoGenerator
 {
-    const outSideOfVendor = '../../';
+    const outSideOfVendor = '../../../';
     private string $src;
     private Parser $parser;
     const phpTag = "<?php \n";
