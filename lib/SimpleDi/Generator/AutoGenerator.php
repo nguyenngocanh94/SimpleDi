@@ -18,7 +18,7 @@ class AutoGenerator
     const outSideOfVendor = '.../../../../';
     private string $src;
     private Parser $parser;
-    const phpTag = "<?php \n";
+    const phpTag = "<?php \n declare(strict_types=1); \n use SimpleDi\Registry\SimpleDi; \n";
 
     function __construct(string $src, string $proxies)
     {
@@ -31,16 +31,20 @@ class AutoGenerator
         if (file_exists($this->proxies)){
             unlink($this->proxies);
         }
-        fopen($this->proxies,'w');
-        file_put_contents($this->proxies, self::phpTag.'return ['."\n");
         try {
-            self::findAllFileInFolder($this->src);
-        }catch (Exception $e){
+            fopen($this->proxies,'w');
+            file_put_contents($this->proxies, self::phpTag.'return ['."\n");
+            try {
+                self::findAllFileInFolder($this->src);
+            }catch (Exception $e){
+                $cursor = fopen($this->proxies, 'a');
+                fwrite($cursor, "];");
+            }
             $cursor = fopen($this->proxies, 'a');
             fwrite($cursor, "];");
+        }catch (Exception $e){
+            unlink($this->proxies);
         }
-        $cursor = fopen($this->proxies, 'a');
-        fwrite($cursor, "];");
     }
 
     private function findAllFileInFolder(string $dir){
@@ -72,7 +76,7 @@ class AutoGenerator
             try {
                 $annotation = AnnotationReader::getMarkExport($className);
                 if ($annotation!=null){
-                    $content .= "\t".$annotation->typeOf.'::class'.'=>['.$className.'::class, '.$annotation->scope."],\n";
+                    $content .= "\t".$annotation->typeOf.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
                     fwrite($file, $content);
                 }
             }catch (Exception $e){
