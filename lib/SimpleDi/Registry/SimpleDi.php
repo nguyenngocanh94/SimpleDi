@@ -19,6 +19,12 @@ class SimpleDi
 
     private array $_configArray;
 
+    /**
+     * @var string
+     * @deprecated just for my project
+     */
+    public string $rootClass;
+
     private array $bindingArray;
 
     public IContainer $container;
@@ -33,7 +39,16 @@ class SimpleDi
         $this->_configArray  = $config;
         $this->bindingArray = $this->_configArray['registry'];
         $this->container = $this->_configArray['container'];
+        $this->rootClass = $this->_configArray['root_class'];
         $this->registry = new Registry($this->bindingArray);
+    }
+
+    /**
+     * @return SimpleDi|null
+     */
+    public static function getInstance(): ?SimpleDi
+    {
+        return self::$_instance;
     }
 
     /**
@@ -41,7 +56,8 @@ class SimpleDi
      * the array parameter:
      * return [
      *  'container'=> $container,
-     *  'registry'=> $autoMarks
+     *  'registry'=> $autoMarks,
+     *  'root_class'=>$class
      *  ];
      * @param array $config
      * @return SimpleDi
@@ -54,6 +70,12 @@ class SimpleDi
         return self::$_instance;
     }
 
+
+    /**
+     * @param string $source
+     * @param Closure $target
+     * @throws NotInitialSimpleDiException
+     */
     public static function binding(string $source, Closure $target){
         if (self::$_instance==null){
             throw new NotInitialSimpleDiException();
@@ -61,6 +83,11 @@ class SimpleDi
         self::$_instance->registry->binding($source, $target());
     }
 
+    /**
+     * @param string $source
+     * @param object $target
+     * @throws NotInitialSimpleDiException
+     */
     public static function bindingInstance(string $source, object $target){
         if (self::$_instance==null){
             throw new NotInitialSimpleDiException();
@@ -68,6 +95,10 @@ class SimpleDi
         self::$_instance->registry->binding($source, $target);
     }
 
+    /**
+     * @return Registry
+     * @throws NotInitialSimpleDiException
+     */
     public static function getRegistry() : Registry{
         if (self::$_instance==null){
             throw new NotInitialSimpleDiException();

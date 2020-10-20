@@ -3,7 +3,10 @@
 
 namespace SimpleDi\Registry;
 
-
+/**
+ * Class Registry
+ * @package SimpleDi\Registry
+ */
 class Registry
 {
     private array $registerArr;
@@ -28,6 +31,6 @@ class Registry
      * @param object $target
      */
     function binding(string $source, object $target){
-        $this->registerArr = array_merge($this->registerArr, [$source => [$target, SINGLETON]]);
+        $this->registerArr = array_merge($this->registerArr, [$source => [$target, SimpleDi::SINGLETON]]);
     }
 }

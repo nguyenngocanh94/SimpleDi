@@ -6,6 +6,7 @@ namespace SimpleDi;
 
 use SimpleDi\Common\StringUtils;
 use SimpleDi\Exceptions\NotRegisterException;
+use SimpleDi\Registry\AutoResolver;
 use SimpleDi\Registry\SimpleDi;
 
 
@@ -71,7 +72,7 @@ class App
      */
     private static function getDependencies(string $class): array
     {
-        $clazz = new ReflectionClass($class);
+        $clazz = new \ReflectionClass($class);
         if (! $clazz->isInstantiable()) {
             return [];
         }

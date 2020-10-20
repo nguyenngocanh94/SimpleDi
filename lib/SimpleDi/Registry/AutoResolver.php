@@ -4,6 +4,8 @@
 namespace SimpleDi\Registry;
 
 
+use SimpleDi\App;
+use SimpleDi\Exceptions\NotInitialSimpleDiException;
 use SimpleDi\Exceptions\NotRegisterException;
 
 class AutoResolver
@@ -11,12 +13,13 @@ class AutoResolver
     /**
      * @param array $items
      * @return array
-     * @throws NotRegisterException
+     * @throws NotRegisterException|NotInitialSimpleDiException
      */
     public static function resolve(array $items): array
     {
         $container = SimpleDi::getInstance()->container;
         $registry = SimpleDi::getInstance()->registry;
+        $rootClass = SimpleDi::getInstance()->rootClass;
         $dependencyInstances = [];
         foreach ($items as $className){
             $instance = $container->resolver($className);
@@ -25,7 +28,7 @@ class AutoResolver
             }else{
                 // need remove in future.
                 // so just ignore it.
-                if (is_subclass_of($className, Sand_Singleton::class)){
+                if (isset($rootClass) && is_subclass_of($className, $rootClass)){
                     $instance = call_user_func(array($className, 'getInstance'));
                     $container->register($className, $instance);
                     $dependencyInstances[] = $instance;
@@ -33,7 +36,7 @@ class AutoResolver
                     //must be in Registry
                     if ($registry->isRegister($className)){
                         list($bindClass, $scope) = $registry->getBindingScope($className);
-                        if ($scope==TRANSIENT){
+                        if ($scope==SimpleDi::TRANSIENT){
                             $dependencyInstances = App::resolver($bindClass);
                         }else{
                             // if container save the instance, drop it out.
