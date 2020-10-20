@@ -48,6 +48,9 @@ class SimpleDi
      */
     public static function getInstance(): ?SimpleDi
     {
+        if (self::$_instance == null){
+            throw new NotInitialSimpleDiException('must call build before do anything');
+        }
         return self::$_instance;
     }
 
