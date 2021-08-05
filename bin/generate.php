@@ -3,7 +3,7 @@
 
 use SimpleDi\Generator\AutoGenerator;
 
-require(__DIR__ . '/../vendor/autoload.php');
+require('../../../autoload.php');
 
 if (isset($argc)) {
     if ($argc < 3 || $argc > 4){

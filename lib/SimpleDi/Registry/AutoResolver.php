@@ -37,7 +37,7 @@ class AutoResolver
                     if ($registry->isRegister($className)){
                         list($bindClass, $scope) = $registry->getBindingScope($className);
                         if ($scope==SimpleDi::TRANSIENT){
-                            $dependencyInstances = App::resolver($bindClass);
+                            $dependencyInstances[] = App::resolver($bindClass);
                         }else{
                             // if container save the instance, drop it out.
                             if (is_object($bindClass)){
