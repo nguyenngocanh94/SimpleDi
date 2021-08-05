@@ -2,17 +2,14 @@
 namespace SimpleDi\Annotations;
 
 use Doctrine\Common\Annotations\AnnotationReader as DocReader;
+use ReflectionProperty;
 
 class AnnotationReader
 {
-    static function isMarkImport(string $class) : bool{
+    static function isMarkImport(ReflectionProperty $property) : bool{
         $reader = new DocReader;
-        $reflector = new \ReflectionClass($class);
-        $annotations = $reader->getClassAnnotations($reflector);
-        foreach ($annotations as $annotation){
-            if ($annotation instanceof Import){
-                return true;
-            }
+        if ($reader->getPropertyAnnotation($property, Import::class)){
+            return true;
         }
         return false;
     }

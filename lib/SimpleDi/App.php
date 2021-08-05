@@ -4,6 +4,8 @@
 namespace SimpleDi;
 
 
+use ReflectionException;
+use SimpleDi\Annotations\AnnotationReader;
 use SimpleDi\Common\StringUtils;
 use SimpleDi\Exceptions\NotRegisterException;
 use SimpleDi\Registry\AutoResolver;
@@ -44,14 +46,11 @@ class App
      * @param string $scope
      * @return object
      * @throws NotRegisterException
+     * @throws ReflectionException
      */
     private static function getRegisterInstance(string $class, string $scope) : object{
-        try {
-            $dependencies = self::getDependencies($class);
-        } catch (ReflectionException $e) {
-            l('can resolver the class '.$class);
-        }
-        $dependencyInstances = AutoResolver::resolve($dependencies);
+        $constructorDependencies = self::getConstructorDependencies($class);
+        $dependencyInstances = AutoResolver::resolve($constructorDependencies);
         if (count($dependencyInstances)>0){
             $instance =  new $class(...$dependencyInstances);
         }else{
@@ -60,8 +59,7 @@ class App
                 SimpleDi::getRegistry()->binding($class, $instance);
             }
         }
-
-        return $instance;
+        return self::getAndSetInjectDependencies($class, $instance);
     }
 
     /**
@@ -70,7 +68,7 @@ class App
      * @return array
      * @throws ReflectionException
      */
-    private static function getDependencies(string $class): array
+    private static function getConstructorDependencies(string $class): array
     {
         $clazz = new \ReflectionClass($class);
         if (! $clazz->isInstantiable()) {
@@ -91,5 +89,25 @@ class App
         }
 
         return $dependencies;
+    }
+
+    private static function getAndSetInjectDependencies(string $class, object $instance): object
+    {
+        $clazz = new \ReflectionClass($class);
+        if (! $clazz->isInstantiable()) {
+            return $instance;
+        }
+
+        $properties = $clazz->getProperties();
+        foreach ($properties as $property){
+            if (AnnotationReader::isMarkImport($property)){
+                $dependency = $property->getType();
+                $dependencyInstance = App::resolver($dependency);
+                $property->setAccessible(true);
+                $property->setValue($instance, $dependencyInstance);
+            }
+        }
+
+        return $instance;
     }
 }
