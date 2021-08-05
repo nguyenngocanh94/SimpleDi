@@ -10,6 +10,6 @@ use Doctrine\Common\Annotations\Annotation;
  */
 class Export extends Annotation
 {
-    public string $typeOf;
+    public string $typeOf = "";
     public string $scope = "SINGLETON";
 }

@@ -18,7 +18,7 @@ class AutoGenerator
     const outSideOfVendor = '.../../../../';
     private string $src;
     private Parser $parser;
-    const phpTag = "<?php \n declare(strict_types=1); \n use SimpleDi\Registry\SimpleDi; \n";
+    const phpTag = "<?php \n\nuse SimpleDi\Registry\SimpleDi; \n \n";
 
     function __construct(string $src, string $proxies)
     {
@@ -76,11 +76,16 @@ class AutoGenerator
             try {
                 $annotation = AnnotationReader::getMarkExport($className);
                 if ($annotation!=null){
-                    $content .= "\t".$annotation->typeOf.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
+                    if ($annotation->typeOf!=""){
+                        $content .= "\t".$annotation->typeOf.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
+                    }else{
+                        $content .= "\t".$className.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
+                    }
+
                     fwrite($file, $content);
                 }
-            }catch (Exception $e){
-
+            }catch (\Throwable $e){
+                echo $e->getMessage()." at class:".$className." file: ".$ff."\n";
             }
         }
     }
