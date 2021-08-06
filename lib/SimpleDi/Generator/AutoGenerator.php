@@ -74,15 +74,17 @@ class AutoGenerator
             $content = "";
             $file = fopen($this->proxies, 'a');
             try {
-                $annotation = AnnotationReader::getMarkExport($className);
-                if ($annotation!=null){
-                    if ($annotation->typeOf!=""){
-                        $content .= "\t".$annotation->typeOf.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
-                    }else{
-                        $content .= "\t".$className.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
-                    }
+                if (strpos($className, 'Controller') === false){
+                    $annotation = AnnotationReader::getMarkExport($className);
+                    if ($annotation!=null){
+                        if ($annotation->typeOf!=""){
+                            $content .= "\t".$annotation->typeOf.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
+                        }else{
+                            $content .= "\t".$className.'::class'.'=>['.$className.'::class, SimpleDi::'.$annotation->scope."],\n";
+                        }
 
-                    fwrite($file, $content);
+                        fwrite($file, $content);
+                    }
                 }
             }catch (\Throwable $e){
                 echo $e->getMessage()." at class:".$className." file: ".$ff."\n";
