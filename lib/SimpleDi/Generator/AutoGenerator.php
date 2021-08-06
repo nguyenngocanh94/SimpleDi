@@ -15,15 +15,15 @@ use SimpleDi\Annotations\AnnotationReader;
  */
 class AutoGenerator
 {
-    const outSideOfVendor = '.../../../../';
     private string $src;
     private Parser $parser;
     const phpTag = "<?php \n\nuse SimpleDi\Registry\SimpleDi; \n \n";
 
     function __construct(string $src, string $proxies)
     {
-        $this->src = self::outSideOfVendor.$src;
-        $this->proxies = self::outSideOfVendor.$proxies;
+        $currentWork = getcwd();
+        $this->src = $currentWork.'/'.$src;
+        $this->proxies = $currentWork.'/'.$proxies;
         $this->parser = new Parser();
     }
 
