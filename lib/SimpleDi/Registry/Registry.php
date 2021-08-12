@@ -26,11 +26,13 @@ class Registry
     }
 
     /**
+     * binding a clouse
      * only binding singleton
      * @param string $source
-     * @param object $target
+     * @param string $target
      */
-    function binding(string $source, object $target){
+    function bindingClosure(string $source, string $target){
         $this->registerArr = array_merge($this->registerArr, [$source => [$target, SimpleDi::SINGLETON]]);
     }
+
 }

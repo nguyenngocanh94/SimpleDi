@@ -12,4 +12,5 @@ interface IContainer
 {
     function register(string $class, $instance) : void;
     function resolver(string $class);
+    function has(string $class);
 }

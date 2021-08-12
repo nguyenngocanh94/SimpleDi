@@ -83,7 +83,8 @@ class SimpleDi
         if (self::$_instance==null){
             throw new NotInitialSimpleDiException();
         }
-        self::$_instance->registry->binding($source, $target());
+        self::$_instance->registry->binding($source, $source);
+        self::$_instance->container->register($source, $target());
     }
 
     /**
@@ -95,7 +96,8 @@ class SimpleDi
         if (self::$_instance==null){
             throw new NotInitialSimpleDiException();
         }
-        self::$_instance->registry->binding($source, $target);
+        self::$_instance->registry->binding($source, $source);
+        self::$_instance->container->register($source, $target);
     }
 
     /**
@@ -107,5 +109,12 @@ class SimpleDi
             throw new NotInitialSimpleDiException();
         }
         return self::$_instance->registry;
+    }
+
+    public static function getContainer() : IContainer{
+        if (self::$_instance==null){
+            throw new NotInitialSimpleDiException();
+        }
+        return self::$_instance->container;
     }
 }

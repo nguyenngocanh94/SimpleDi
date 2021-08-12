@@ -26,4 +26,9 @@ class SdContainer implements IContainer
     {
         return $this->resolvedArray[$class];
     }
+
+    public function has(string $class)
+    {
+        return isset($this->resolvedArray[$class]);
+    }
 }
