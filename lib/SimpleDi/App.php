@@ -43,7 +43,7 @@ class App
      * @param string $scope
      * @return object
      * @throws NotRegisterException
-     * @throws ReflectionException
+     * @throws ReflectionException|Exceptions\NotInitialSimpleDiException
      */
     private static function getRegisterInstance(string $class, string $scope) : object{
         // in container allway keep singleton
@@ -58,10 +58,13 @@ class App
         }else{
             $instance = new $class();
         }
-        if ($scope == SINGLETON){
+
+        $instance = self::getAndSetInjectDependencies($class, $instance);
+        if ($scope == SimpleDi::SINGLETON){
             SimpleDi::getContainer()->register($class, $instance);
         }
-        return self::getAndSetInjectDependencies($class, $instance);
+
+        return $instance;
     }
 
     /**
@@ -93,6 +96,14 @@ class App
         return $dependencies;
     }
 
+    /**
+     * @param string $class
+     * @param object $instance
+     * @return object
+     * @throws Exceptions\NotInitialSimpleDiException
+     * @throws NotRegisterException
+     * @throws ReflectionException
+     */
     private static function getAndSetInjectDependencies(string $class, object $instance): object
     {
         $clazz = new \ReflectionClass($class);
