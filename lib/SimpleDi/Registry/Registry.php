@@ -31,7 +31,7 @@ class Registry
      * @param string $source
      * @param string $target
      */
-    function bindingClosure(string $source, string $target){
+    function binding(string $source, string $target){
         $this->registerArr = array_merge($this->registerArr, [$source => [$target, SimpleDi::SINGLETON]]);
     }
 
